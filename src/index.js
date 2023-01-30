@@ -14,17 +14,18 @@ showButton(false);
 formSearch.addEventListener('submit', onSearch);
 loadMore.addEventListener('click', onLoadMore);
 
-async function onSearch(evt) {
-  evt.preventDefault();
+async function onSearch(e) {
+  e.preventDefault();
 
   showButton(false);
-  imagesApi.searchQuery = evt.currentTarget.elements.searchQuery.value;
+  imagesApi.searchQuery = e.currentTarget.elements.searchQuery.value;
   if (imagesApi.searchQuery === '') {
     Notiflix.Notify.failure('Enter the search value!');
-    imagesApi.resetPage();
     gallery.innerHTML = '';
     return;
   }
+  imagesApi.resetPage();
+  gallery.innerHTML = '';
 
   try {
     const fetchCards = await imagesApi.fetchImages();
